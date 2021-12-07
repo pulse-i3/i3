@@ -1,4 +1,7 @@
-bindsym Mod1+m exec xfce4-terminal -e mocp
+bindsym Mod1+m exec urxvt -e mocp -T darkdot_theme
+bindsym Mod1+e exec geary
+bindsym Mod1+c exec galculator
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -77,7 +80,7 @@ workspace_layout default
 ##############################
 
 #border indicator on windows:
-new_window pixel 1
+new_window pixel 2
 
 # thin borders
 # hide_edge_borders both
@@ -128,7 +131,7 @@ bindsym $mod+4    workspace  $ws4
 ######################################
 
 # start a terminal
-bindsym Mod1+Return exec xfce4-terminal
+bindsym Mod1+Return exec urxvt
 
 # kill focused window
 bindsym $mod+q kill
@@ -139,7 +142,7 @@ bindsym $mod+q kill
 # lock with a picture:
 #bindsym $mod+l exec i3lock -i  ~/.config/i3/i3-lock-screen.png -p default|win -t
 # lock by blurring the screen:
-bindsym $mod+l exec "i3lock -c 000000"
+bindsym $mod+l exec --no-startup-id "i3lock -c 000000"
 #bindsym $mod+l ecec ~/.i3lock.sh
 # reload the configuration file
 #bindsym $mod+Shift+c reload
@@ -192,7 +195,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # open new empty workspace
-bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/empty_workspace
+#bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/empty_workspace
 
 ## Multimedia Keys
 
@@ -226,7 +229,7 @@ bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
 
 ## App shortcuts
 bindsym Mod1+g exec /usr/bin/firefox
-bindsym Mod1+f exec /usr/bin/nautilus
+bindsym Mod1+f exec urxvt -e ranger
 bindsym Print exec --no-startup-id ~/.screenshot.sh 
 
 ##########################################
@@ -239,7 +242,7 @@ set $ws1 "1:"
 set $ws2 "2:"
 set $ws3 "3:"
 #set $ws4 "5:"
-set $ws4 "4:"
+set $ws4 "4:"
 
 # use workspaces on different displays:
 # where you have to replace VGA-0/HDMI-0 with the names for your displays
@@ -252,17 +255,25 @@ set $ws4 "4:"
 
 # bind program to workspace and focus to them on startup:
 assign [class="Xfce4-terminal"] $ws1
+assign [class="URxvt"] $ws1
+assign [class="URxvt" title="ranger"] $ws3
 assign [class="(?i)firefox"] $ws2
-assign [class="Org.gnome.Nautilus"] $ws3
-assign [class="Thunderbird"] $ws4
+assign [class="qutebrowser"] $ws2
+assign [class="Geary"] $ws2
+assign [class="Thunar"] $ws3
+assign [title="music"] $ws4
 #assign [class="TelegramDesktop"] $ws5
 
 
 # automatic set focus new window if it opens on another workspace then the current:
 for_window [class=Xfce4-terminal] focus
+for_window [class=URxvt] focus
+for_window [class="URxvt" title="ranger"] focus
+for_window [title=music] focus
+for_window [class=qutebrowser] focus
 for_window [class=(?i)firefox] focus
-for_window [class=Org.gnome.Nautilus] focus
-for_window [class=Thunderbird] focus
+for_window [class=Thunar] focus
+for_window [class=Geary] focus
 #for_window [class=TelegramDesktop] focus
 
 #############################################
@@ -313,7 +324,7 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 #exec --no-startup-id nm-applet
 
 # set wallpaper
-exec --no-startup-id ~/.wal.sh
+#exec --no-startup-id nitrogen --random --set-zoom-fill .local/share/wallhaven/
 #exec --no-startup-id feh --bg-fill /usr/share/endeavouros/backgrounds/endeavouros_i3.png
 exec --no-startup-id picom
 # set powersavings for display:
@@ -330,6 +341,7 @@ exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 # set floating (nontiling)for apps needing it
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
+for_window [class="Connman-gtk"] floating enable
 
 # set floating (nontiling) for special apps
 for_window [class="Xsane" instance="xsane"] floating enable
