@@ -1,0 +1,12 @@
+# Compositor
+picom -f &
+
+~/.fehbg &
+
+# exec dwm
+
+while xsetroot -name "`date "+ %a %b %d  %I:%M %p "`"
+do
+	sleep 1m
+done &
+exec dwm
