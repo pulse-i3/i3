@@ -58,6 +58,7 @@ for_window [class="Connman-gtk"] floating enable
 for_window [class="Xsane" instance="xsane"] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
+for_window [window_role="About"] floating enable
 
 exec --no-startup-id picom
 # set powersavings for display:
@@ -76,7 +77,6 @@ for_window [class=Thunar] focus
 for_window [class=Geary] focus
 
 # bind program to floating
-for_window [window_role="About"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="Xfce4-terminal"] floating enable
 
